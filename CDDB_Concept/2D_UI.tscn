@@ -1,0 +1,133 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://CDDB_Concept/Assets/BG_150x720.png" type="Texture" id=1]
+[ext_resource path="res://CDDB_Concept/Assets/BG_720x150.png" type="Texture" id=2]
+[ext_resource path="res://CDDB_Concept/Assets/PlaceHolder/Placeholder_1130x570.png" type="Texture" id=3]
+[ext_resource path="res://CDDB_Concept/Assets/PlaceHolder/options_150x150.png" type="Texture" id=4]
+[ext_resource path="res://CDDB_Concept/Assets/PlaceHolder/artist_150x150.png" type="Texture" id=5]
+[ext_resource path="res://CDDB_Concept/Assets/PlaceHolder/lel_150x120.png" type="Texture" id=6]
+[ext_resource path="res://CDDB_Concept/Assets/CustomStyles/ArtistButtonHover.tres" type="StyleBox" id=7]
+[ext_resource path="res://CDDB_Concept/Assets/PlaceHolder/hovered.png" type="Texture" id=9]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 150, 150 )
+modulate_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="Theme" id=1]
+
+[node name="2D_UI" type="Node"]
+
+[node name="Window" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LeftBox" type="VBoxContainer" parent="Window"]
+margin_right = 150.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 150, 720 )
+custom_constants/separation = 0
+
+[node name="Options" type="TextureButton" parent="Window/LeftBox"]
+margin_right = 150.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
+expand = true
+
+[node name="ShowArtists" type="TextureButton" parent="Window/LeftBox"]
+margin_top = 150.0
+margin_right = 150.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 150, 150 )
+disabled = true
+
+[node name="ShowTitles" type="TextureButton" parent="Window/LeftBox"]
+margin_top = 300.0
+margin_right = 150.0
+margin_bottom = 444.0
+rect_min_size = Vector2( 150, 144 )
+disabled = true
+
+[node name="ShowAlbum" type="TextureButton" parent="Window/LeftBox"]
+margin_top = 444.0
+margin_right = 150.0
+margin_bottom = 594.0
+rect_min_size = Vector2( 150, 150 )
+disabled = true
+
+[node name="TextureButton" type="TextureButton" parent="Window/LeftBox"]
+margin_top = 594.0
+margin_right = 150.0
+margin_bottom = 714.0
+rect_min_size = Vector2( 150, 120 )
+texture_normal = ExtResource( 6 )
+
+[node name="TopBox" type="HBoxContainer" parent="Window"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1130.0
+margin_bottom = 150.0
+custom_constants/separation = 0
+
+[node name="Button" type="Button" parent="Window/TopBox"]
+margin_right = 150.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+
+[node name="Button2" type="Button" parent="Window/TopBox"]
+margin_left = 150.0
+margin_right = 300.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 150, 150 )
+
+[node name="BG_Top" type="TextureRect" parent="Window/TopBox"]
+show_behind_parent = true
+light_mask = 2
+margin_left = 300.0
+margin_right = 1430.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 1130, 150 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="GameArea" type="TextureRect" parent="Window"]
+show_behind_parent = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1130.0
+margin_top = -570.0
+texture = ExtResource( 3 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Window/GameArea"]
+margin_left = 51.0
+margin_top = 53.0
+margin_right = 1109.0
+margin_bottom = 511.0
+theme = SubResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Placeholder"
+fit_content_height = true
+
+[node name="BG_Left" type="TextureRect" parent="Window"]
+show_behind_parent = true
+light_mask = 2
+margin_right = 150.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 150, 720 )
+texture = ExtResource( 1 )
+expand = true
