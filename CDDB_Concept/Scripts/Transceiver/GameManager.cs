@@ -29,16 +29,11 @@ public class GameManager : Node
 
     private void registerSignals()
     {
-        // var listOfEntityButtons = new List<Node>();
-        var entityPanel = GetNode<Control>("/root/Interface/UI/EntityPanel");
-        entityPanel.Connect(nameof(ShowEntityPanel), entityPanel, "display");
         var entityPanelScriptManager = GetNode("/root/Interface/UI/EntityPanel/CS_EntityPanel");
-        // listOfEntityButtons.AddRange((IEnumerable<Node>)GetNode("Interface/UI/LeftBar").GetChildren());
-        foreach (var item in GetNode("/root/Interface/UI/LeftBar").GetChildren())
+        foreach (Node i in GetNode("/root/Interface/UI/LeftBar").GetChildren())
         {
-            // listOfEntityButtons.Add(item as Node);
-            (item as Node).Connect(nameof(EntityButtonPress), entityPanelScriptManager, "displayEntity");
-            string name = (item as Node).Name;
+            i.Connect(nameof(EntityButtonPress), entityPanelScriptManager, "displayEntity");
+            string name = i.Name;
             GD.Print(name.Replace("Button", string.Empty));
         }
     }

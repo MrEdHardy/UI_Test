@@ -28,13 +28,13 @@ rect_min_size = Vector2( 218, 50 )
 theme = ExtResource( 1 )
 items = [ "TestItem1", null, false, "TestItem2", null, false ]
 
-[node name="Button" type="Button" parent="."]
+[node name="OKButton" type="Button" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -31.0
-margin_top = -20.0
+margin_left = -62.0
+margin_top = -43.0
 theme = ExtResource( 2 )
 text = "OK"
 flat = true

@@ -21,6 +21,7 @@ public class OKButton : Button
 
     private void _on_OKButton_button_up()
     {
-        (this.GetParent().GetParent() as Control).Visible = false;
+        // (this.GetParent().GetParent() as Control).Visible = false;
+        (this.GetParent().GetParent() as Control).Hide();
     }
 }
