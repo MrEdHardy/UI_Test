@@ -25,11 +25,20 @@ public class EntityPanel : Control
         this.Hide();
     }
 
-    public void Display(string title)
+    private void Display(string title)
     {
         clear();
         var entityLabel = GetNode<Label>("EntityName");
         entityLabel.Text = title;
         this.Show();
+    }
+
+    public Godot.Object GetCurrentType()
+    {
+        // Implementation folgt
+
+        var banana = new TestObject("banane", 1337);
+
+        return banana;
     }
 }

@@ -1,19 +1,11 @@
 using Godot;
 using System;
 
-public class CrudButton : Node
+public class DeleteManager : Node
 {
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";
-    [Export]
-    string operation;
-
-    [Signal]
-    delegate void ButtonPressed(string operation);
-
-    [Signal]
-    delegate void BindData(string objectName);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -27,9 +19,8 @@ public class CrudButton : Node
 //      
 //  }
 
-    private void onButtonUp()
+    internal void BindData(string name)
     {
-        EmitSignal(nameof(ButtonPressed), operation);
-        GD.Print($"It seems the {operation}-Button was activated!");
+        GD.Print($"Binding {name} data...");
     }
 }

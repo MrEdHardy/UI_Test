@@ -8,12 +8,12 @@ public class CS_EntityPanel : Node
     // private string b = "text";
     [Signal]
     delegate void ShowEntityPanel(string title);
-    
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         registerSignals();
+        // var b = IsConnected("RelayShowEntityInfoPanelMessage", GetNode("/root/Interface/GameManager"), "relaySignalShowEntityInfoPanel");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,7 +28,7 @@ public class CS_EntityPanel : Node
         Connect(nameof(ShowEntityPanel), entityPanel, "Display");
     }
 
-    public void displayEntity(string mode)
+    public void DisplayEntity(string mode)
     {
         string entity = mode.Replace("Button", string.Empty);
         EmitSignal(nameof(ShowEntityPanel), entity);

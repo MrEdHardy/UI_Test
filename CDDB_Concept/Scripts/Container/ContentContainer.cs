@@ -6,6 +6,11 @@ public sealed class ContentContainer : Node
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";
+    [Signal]
+    delegate void BindDataElements(string name);
+
+    [Signal]
+    delegate void RelayShowEntityInfoPanelMessage();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -19,19 +24,25 @@ public sealed class ContentContainer : Node
 //      
 //  }
 
-    public void ClearContentPanel()
+    public void ClearContentPanel(Node target = null)
     {
         foreach (Node item in this.GetChild(0).GetChildren())
         {
             item.QueueFree();
         }
+        
+        if(target != null && IsConnected(nameof(BindDataElements), target, "BindData"))
+            Disconnect(nameof(BindDataElements), target, "BindData");
     }
 
     private void addModuleToChildContainer(string pathToScene)
     {
-        ClearContentPanel();
         var newPanel = ResourceLoader.Load<PackedScene>(pathToScene);
-        this.GetChild(0).AddChild(newPanel.Instance());
+        ClearContentPanel(newPanel.Instance());
+        var instance = newPanel.Instance();
+        this.GetChild(0).AddChild(instance);
+        Connect(nameof(BindDataElements), instance.GetNode<Node>("SignalManager"), "BindData");
+        EmitSignal(nameof(BindDataElements), GetParent().GetNode<Label>("EntityName").Text);
     }
 
     private void showContentPanel(CrudOperations operation)
@@ -60,7 +71,7 @@ public sealed class ContentContainer : Node
         }
         else
         {
-            throw new InvalidOperationException("No valid or available Crud Operation selected");
+            throw new InvalidOperationException("No valid or available CRUD Operation selected");
         }
         addModuleToChildContainer(string.Concat(basePath, path));
     }

@@ -1,10 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://interface/counter/label_bg.png" type="Texture" id=1]
 [ext_resource path="res://CDDB_Concept/Fonts/EntityPanel.tres" type="DynamicFont" id=2]
-[ext_resource path="res://CDDB_Concept/Testscenes/EntityPanel/MenuContentScenes/GetAll.tscn" type="PackedScene" id=3]
-[ext_resource path="res://CDDB_Concept/Testscenes/EntityPanel/MenuContentScenes/GetById.tscn" type="PackedScene" id=4]
-[ext_resource path="res://CDDB_Concept/Testscenes/EntityPanel/MenuContentScenes/Add.tscn" type="PackedScene" id=5]
 [ext_resource path="res://CDDB_Concept/Scripts/Transceiver/CS_EntityPanel.cs" type="Script" id=6]
 [ext_resource path="res://CDDB_Concept/Scripts/Buttons/OKButton.cs" type="Script" id=7]
 [ext_resource path="res://CDDB_Concept/Scripts/EntityPanel/EntityPanel.cs" type="Script" id=8]
@@ -170,20 +167,6 @@ margin_bottom = 518.0
 rect_min_size = Vector2( 1028, 518 )
 mouse_filter = 2
 custom_constants/separation = 0
-
-[node name="GetAll" parent="Content/VBoxContainer" instance=ExtResource( 3 )]
-visible = false
-margin_right = 1028.0
-margin_bottom = 259.0
-
-[node name="GetById" parent="Content/VBoxContainer" instance=ExtResource( 4 )]
-visible = false
-margin_right = 1028.0
-
-[node name="Add" parent="Content/VBoxContainer" instance=ExtResource( 5 )]
-visible = false
-margin_right = 1028.0
-margin_bottom = 259.0
 
 [node name="CS_EntityPanel" type="Node" parent="."]
 script = ExtResource( 6 )
