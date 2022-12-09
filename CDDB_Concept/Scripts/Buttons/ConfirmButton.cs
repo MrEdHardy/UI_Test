@@ -40,8 +40,10 @@ public class ConfirmButton : Button
         TestObject element = null;
         // Hier soll der Typ ausgewertet werden
         if(type == typeof(TestObject))
-        {
-            short id = (short)(this.cemetery.GetObjects<TestObject>().Max(to => to.Id) + 1);
+        {   
+            short id = 0;
+            if(this.cemetery.GetObjects<TestObject>().Count() > 0)
+                id = (short)(this.cemetery.GetObjects<TestObject>().Max(to => to.Id) + 1);
             string name = "Könnte fehlgeschlagen sein^^";
             name = (textInputs.Where(ti => ti.Name.Equals("NameValue")).FirstOrDefault())?.Text;
             element = new TestObject(name, id);
