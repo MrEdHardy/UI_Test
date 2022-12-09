@@ -26,11 +26,12 @@ public class ConfirmButtonDelete : Button
         if(itemList.GetSelectedItems().Length <= 0)
             return;
         var selectedId = itemList.GetSelectedItems()[0];
+        var id = int.Parse(itemList.GetItemText(selectedId).Split(" ")[0]);
         var type = this.GetEntityPanel().GetCurrentType().GetType();
 
         if(type == typeof(TestObject))
         {
-            var selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, selectedId);
+            var selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, id);
             cemetery.DeleteObject(selectedElement);
             (itemList as SelectableItemListDelete).fillWithDemoData();
         }
