@@ -83,7 +83,7 @@ public class OptionButtonUpdate : OptionButton
 
         if(type == typeof(TestObject))
         {
-            var selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, index);
+            var selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, id);
             this.GetParent().GetNode<TextEdit>("NameValue").Text = selectedElement.Name;
         }
     }
