@@ -21,6 +21,8 @@ public class DataCemetery : Node
     public void SaveObject<T>(T element)
     where T: IEntityObject
     {
+        if(dataGraves.ContainsKey(element))
+            this.DeleteObject(element);
         this.dataGraves.Add(element, typeof(T));
     }
 
@@ -28,6 +30,8 @@ public class DataCemetery : Node
     {
         foreach (KeyValuePair<object, Type> pair in elements)
         {
+            if(dataGraves.ContainsKey(pair.Key))
+                this.DeleteObject(pair.Key as IEntityObject);
             var type = pair.Key.GetType();
             this.SaveObject(pair.Key as IEntityObject);
         }
@@ -75,19 +79,32 @@ public class DataCemetery : Node
     }
 
     public void DeleteObject<T>(T element)
+    where T: IEntityObject
     {
         this.dataGraves.Remove(element);
     }
 
     public void DeleteObjects(IEnumerable<object> elements)
     {
-        foreach (var i in elements)
+        foreach (IEntityObject i in elements)
             this.DeleteObject(i);
     }
 
     public void DeleteAll()
     {
         this.dataGraves.Clear();
+    }
+
+    public int GetCount<T>()
+    where T: IEntityObject
+    {
+        var elements = this.GetObjects<T>();
+        return elements.Count();
+    }
+
+    public int GetCountAll()
+    {
+        return this.dataGraves.Count;
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
