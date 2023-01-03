@@ -20,7 +20,7 @@ namespace DataAccess.Infrastructure.ConfigurationHelpers
         private static IConfiguration CreateConfiguration()
         {
             return new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "DataAccess/ConfigFiles"))
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../DataAccess/ConfigFiles"))
                 .AddJsonFile("config.json")
                 .Build();
         }

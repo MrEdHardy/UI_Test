@@ -18,7 +18,7 @@ namespace DataAccess.Infrastructure.Entities
         {
         }
 
-        internal ArtistEntity(int? id, string name = null)
+        public ArtistEntity(int? id, string name = null)
         {
             Id = id;
             Name = name;
