@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public class SelectableItemListGetAll : ItemList, IItemList
 {
@@ -29,7 +30,6 @@ public class SelectableItemListGetAll : ItemList, IItemList
         // var j = IsConnected(nameof(RelayShowEntityInfoPanelMessage), GetNode<Node>("/root/Interface/GameManager"), "relaySignalShowEntityInfoPanel");
         var splitString = this.GetItemText(index).Split(" ");
         // var i = int.Parse(splitString[0]); 
-
         EmitSignal(nameof(RelayShowEntityInfoPanelMessage), splitString[0]);
     }
 }

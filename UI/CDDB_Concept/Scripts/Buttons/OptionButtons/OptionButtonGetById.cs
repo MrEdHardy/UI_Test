@@ -52,6 +52,34 @@ public class OptionButtonGetById : OptionButton
         this.GetParent().GetNode<ItemList>("ItemList").AddItem(testObject.ToString());
     }
 
+    private void fillWithData()
+    {
+        this.Clear();
+        var type = this.GetEntityPanel().GetCurrentType().GetType();
+        IEnumerable<IEntityObject> elementList = null;
+
+        if(type == typeof(ArtistViewModel))
+        {
+            elementList = cemetery.GetObjects<ArtistViewModel>();
+            (elementList as List<ArtistViewModel>).Sort(new EntityObjectComparer());
+            foreach (ArtistViewModel element in elementList)
+            {
+                this.AddItem(element.ToString());
+            }
+            this.GetParent().GetNode<ItemList>("ItemList").AddItem((elementList as List<ArtistViewModel>)[0].ToString());
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            elementList = cemetery.GetObjects<TitleViewModel>();
+            (elementList as List<TitleViewModel>).Sort(new EntityObjectComparer());
+            foreach (TitleViewModel element in elementList)
+            {
+                this.AddItem(element.ToString());
+            }
+            this.GetParent().GetNode<ItemList>("ItemList").AddItem((elementList as List<TitleViewModel>)[0].ToString());
+        }
+    }
+
     private void onItemSelected(int index)
     {
         var itemlist = this.GetParent().GetNode<ItemList>("ItemList");
@@ -60,7 +88,23 @@ public class OptionButtonGetById : OptionButton
 
         // richtige Implementation von Typen folgt!
         // Beispielimplementation
-        var element = this.cemetery.GetObject<TestObject>(ElementProps.Id, id);
-        itemlist.AddItem(element.ToString());
+        var type = this.GetEntityPanel().GetCurrentType().GetType();
+
+        if(type == typeof(ArtistViewModel))
+        {
+            var element = this.cemetery.GetObject<ArtistViewModel>(ElementProps.Id, id);
+            itemlist.AddItem(element.ToString());
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            var element = this.cemetery.GetObject<TitleViewModel>(ElementProps.Id, id);
+            itemlist.AddItem(element.ToString());
+        }
+        else
+        {
+            var element = this.cemetery.GetObject<TestObject>(ElementProps.Id, id);
+            itemlist.AddItem(element.ToString());
+        }
+
     }
 }

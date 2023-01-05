@@ -14,7 +14,7 @@ public class GameManager : Node
     [Signal]
     delegate void ShowEntityPanel(string title);
     [Signal]
-    delegate void ShowEntityInfoPanel(Godot.Object displayObject, int index);
+    delegate void ShowEntityInfoPanel(int index);
 
     // [Signal]
     // delegate void RelayShowEntityInfoPanelMessage();
@@ -63,16 +63,17 @@ public class GameManager : Node
         // var resultAll1 = await af.GetAll();
         var cemetery = this.GetDataCemetery();
         await cemetery.FillWithApiData();
-        var ele = cemetery.GetObjects<ArtistViewModel>();
-        string baseUrl = "http://localhost:6969/main.php/";
-        var af = new ArtistFactory(new Uri(baseUrl));
-        ArtistViewModel addResult = await af.Add(new ArtistEntity { Name = "Artist" });
-        cemetery.SaveObject(addResult);
-        var ele1 = cemetery.GetObjects<ArtistViewModel>();
-        addResult.Name = "Changed!";
-		await af.Update(addResult.Id, addResult);
-        cemetery.SaveObject(addResult);
-        var ele2 = cemetery.GetObjects<ArtistViewModel>();
+        // var ele = cemetery.GetObjects<ArtistViewModel>();
+        // string baseUrl = "http://localhost:6969/main.php/";
+        // var af = new ArtistFactory(new Uri(baseUrl));
+        // ArtistViewModel addResult = await af.Add(new ArtistEntity { Name = "Artist" });
+        // cemetery.SaveObject(addResult);
+        // var ele1 = cemetery.GetObjects<ArtistViewModel>();
+        // addResult.Name = "Changed!";
+		// await af.Update(addResult.Id, addResult);
+        // cemetery.SaveObject(addResult);
+        // var ele2 = cemetery.GetObjects<ArtistViewModel>();
+        var h = this.GetDemoModeStatus();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,6 +101,6 @@ public class GameManager : Node
         var type = GetNode<EntityPanel>("/root/Interface/UI/EntityPanel").GetCurrentType();
         // var name =  GetNode<Label>("/root/Interface/UI/EntityPanel/EntityName").Text;
         // var test = type.GetType();
-        EmitSignal(nameof(ShowEntityInfoPanel), type, index);
+        EmitSignal(nameof(ShowEntityInfoPanel), index);
     }
 }

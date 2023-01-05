@@ -56,7 +56,7 @@ public class DataCemetery : Node
         var list = new List<T>();
         foreach (KeyValuePair<object, Type> pair in this.dataGraves)
         {
-            if(pair.Key is IEntityObject)
+            if(pair.Key is T)
                 list.Add((T)pair.Key);
         }
 
@@ -124,9 +124,13 @@ public class DataCemetery : Node
     {
         string baseUrl = "http://localhost:6969/main.php/";
         var af = new ArtistFactory(new Uri(baseUrl));
-		var resultAll = await af.GetAll();
-        var convVM = resultAll.ToViewModel();
-        SaveObjectRange(convVM);
+        var tf = new TitleFactory(new Uri(baseUrl));
+		var resultAllArtists = await af.GetAll();
+        var resultAllTitles = await tf.GetAll();
+        var artistVM = resultAllArtists.ToViewModel();
+        var titleVM = resultAllTitles.ToViewModel();
+        SaveObjectRange(artistVM);
+        SaveObjectRange(titleVM);
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

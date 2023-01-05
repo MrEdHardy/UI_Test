@@ -7,7 +7,7 @@ public class EntityInfoPanelContainer : Node
     // private int a = 2;
     // private string b = "text";
     [Signal]
-    delegate void DisplayObject(Godot.Object testObject, int index);
+    delegate void DisplayObject(int index);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,11 +26,11 @@ public class EntityInfoPanelContainer : Node
         Connect(nameof(DisplayObject), GetNode<Node>("InnerContent/Element/SignalManager"), "displayContent");
     }
 
-    private void fillPanels(Godot.Object testObject, int index)
+    private void fillPanels(int index)
     {
         // GetNode("InnerContent/Element/VBoxContainer/");
         GD.Print("Signal reached EntityInfoPanel/Content");
         var t = IsConnected(nameof(DisplayObject), GetNode<Node>("InnerContent/Element/SignalManager"), "displayContent");
-        EmitSignal(nameof(DisplayObject), testObject, index);
+        EmitSignal(nameof(DisplayObject), index);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DataAccess.Infrastructure.Entities;
 using Godot;
 
-public sealed class ArtistViewModel : IEntityObject
+internal sealed class TitleViewModel : IEntityObject
 {
     private int id;
     private string name;
@@ -15,13 +15,13 @@ public sealed class ArtistViewModel : IEntityObject
 
     public string Name { get { return this.name; }  set { this.name = value; } }
 
-    internal ArtistViewModel(int id, string name)
+    internal TitleViewModel(int id, string name)
     {
         this.id = id;
         this.name = name;
     }
 
-    private ArtistViewModel()
+    private TitleViewModel()
     {
     }
 
@@ -30,16 +30,16 @@ public sealed class ArtistViewModel : IEntityObject
         return string.Concat(Id, " ", Name);
     }
 
-    public static implicit operator ArtistEntity(ArtistViewModel viewModel)
+    public static implicit operator TitleEntity(TitleViewModel viewModel)
     {
         if (viewModel.Id <= 0)
             throw new System.Exception("Id cannot be 0 or negative");
 
-        return new ArtistEntity(viewModel.Id, viewModel.Name);
+        return new TitleEntity(viewModel.Id, viewModel.Name);
     }
 
-    public static implicit operator ArtistViewModel(ArtistEntity entity)
+    public static implicit operator TitleViewModel(TitleEntity entity)
     {
-        return new ArtistViewModel(entity.Id ?? 0, entity.Name);
+        return new TitleViewModel(entity.Id ?? 0, entity.Name);
     }
 }

@@ -9,6 +9,9 @@ public class DeleteManager : Node
     [Signal]
     delegate void fillWithDemoDataDelete();
 
+    [Signal]
+    delegate void fillWithDataDelete();
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,11 +29,16 @@ public class DeleteManager : Node
     {
         if(!IsConnected(nameof(fillWithDemoDataDelete), GetParent().GetNode("VBoxContainer/IdList"), "fillWithDemoData"))
             Connect(nameof(fillWithDemoDataDelete), GetParent().GetNode("VBoxContainer/IdList"), "fillWithDemoData");
+        if(!IsConnected(nameof(fillWithDataDelete), GetParent().GetNode("VBoxContainer/IdList"), "FillWithData"))
+            Connect(nameof(fillWithDataDelete), GetParent().GetNode("VBoxContainer/IdList"), "FillWithData");
     }
 
     internal void BindData(string name)
     {
-        EmitSignal(nameof(fillWithDemoDataDelete));
+        if(this.GetEntityPanel().GetCurrentType().GetType() == typeof(TestObject))
+            EmitSignal(nameof(fillWithDemoDataDelete));
+        else
+            EmitSignal(nameof(fillWithDataDelete));
         GD.Print($"Binding {name} data...");
     }
 }

@@ -45,4 +45,30 @@ public class SelectableItemListDelete : ItemList
             }
         }
     }
+
+    public void FillWithData()
+    {
+        this.Clear();
+        var type = this.GetEntityPanel().GetCurrentType().GetType();
+        IEnumerable<IEntityObject> elementList = null;
+
+        if(type == typeof(ArtistViewModel))
+        {
+            elementList = cemetery.GetObjects<ArtistViewModel>();
+            (elementList as List<ArtistViewModel>).Sort(new EntityObjectComparer());
+            foreach (ArtistViewModel element in elementList)
+            {
+                this.AddItem(element.ToString());
+            }
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            elementList = cemetery.GetObjects<TitleViewModel>();
+            (elementList as List<TitleViewModel>).Sort(new EntityObjectComparer());
+            foreach (TitleViewModel element in elementList)
+            {
+                this.AddItem(element.ToString());
+            }
+        }
+    }
 }

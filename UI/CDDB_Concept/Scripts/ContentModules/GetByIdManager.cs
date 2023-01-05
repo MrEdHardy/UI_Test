@@ -11,6 +11,9 @@ public class GetByIdManager : Node
     [Signal]
     delegate void fillWithDemoData();
 
+    [Signal]
+    delegate void fillWithDataGetById();
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -27,11 +30,16 @@ public class GetByIdManager : Node
     {
         if(!IsConnected(nameof(fillWithDemoData), GetParent().GetNode("ScrollContainer/VBoxContainer/OptionButton"), "fillWithDemoData"))
             Connect(nameof(fillWithDemoData), GetParent().GetNode("ScrollContainer/VBoxContainer/OptionButton"), "fillWithDemoData");
+        if(!IsConnected(nameof(fillWithDataGetById), GetParent().GetNode("ScrollContainer/VBoxContainer/OptionButton"), "fillWithData"))
+            Connect(nameof(fillWithDataGetById), GetParent().GetNode("ScrollContainer/VBoxContainer/OptionButton"), "fillWithData");
     }
 
     internal void BindData(string name)
     {
         GD.Print($"Binding {name} data...");
-        EmitSignal(nameof(fillWithDemoData));
+        if(this.GetEntityPanel().GetCurrentType().GetType() == typeof(TestObject))
+            EmitSignal(nameof(fillWithDemoData));
+        else
+            EmitSignal(nameof(fillWithDataGetById));
     }
 }

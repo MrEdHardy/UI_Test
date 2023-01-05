@@ -33,12 +33,24 @@ public class EntityPanel : Control
         this.Show();
     }
 
-    public Godot.Object GetCurrentType()
+    public IEntityObject GetCurrentType()
     {
         // Implementation folgt
+        string currentElement = this.GetNode<Label>("EntityName").Text;
+        IEntityObject currentObject = null;
+        if(currentElement.ToLower().Contains("artist"))
+        {
+            currentObject = new ArtistViewModel(default, string.Empty);
+        }
+        else if(currentElement.ToLower().Contains("title"))
+        {
+            currentObject = new TitleViewModel(default, string.Empty);
+        }
+        else
+        {
+            currentObject = new TestObject(string.Empty, default);
+        }
 
-        var banana = new TestObject("banane", 1337);
-
-        return banana;
+        return currentObject;
     }
 }

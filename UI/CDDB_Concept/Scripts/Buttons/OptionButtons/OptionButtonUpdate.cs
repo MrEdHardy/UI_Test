@@ -75,6 +75,60 @@ public class OptionButtonUpdate : OptionButton
         }
     }
 
+    public void fillWithData()
+    {
+        this.Clear();
+        var type = this.GetEntityPanel().GetCurrentType().GetType();
+        IEnumerable<IEntityObject> elementList = null;
+
+        if(type == typeof(ArtistViewModel))
+        {
+            elementList = cemetery.GetObjects<ArtistViewModel>();
+            (elementList as List<ArtistViewModel>).Sort(new EntityObjectComparer());
+            foreach (ArtistViewModel element in elementList)
+            {
+                this.AddItem(element.ToString());
+            }
+
+            var list = new List<Godot.Object>();
+            foreach (var field in ArtistViewModel.Fields)
+            {
+                if(field.Value == typeof(TextEdit))
+                {
+                    list.Add(this.GetParent().GetNode<TextEdit>($"{field.Key}Value"));
+                }
+            }
+
+            if(list.Count >= ArtistViewModel.Fields.Count)
+            {
+                (list.Where(ge => ge is TextEdit).Cast<TextEdit>().Where(te => te.Name == (ArtistViewModel.Fields.First()).Key + "Value")).First().Text = (elementList as List<ArtistViewModel>)[0].Name;
+            }
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            elementList = cemetery.GetObjects<TitleViewModel>();
+            (elementList as List<TitleViewModel>).Sort(new EntityObjectComparer());
+            foreach (TitleViewModel element in elementList)
+            {
+                this.AddItem(element.ToString());
+            }
+
+            var list = new List<Godot.Object>();
+            foreach (var field in TitleViewModel.Fields)
+            {
+                if(field.Value == typeof(TextEdit))
+                {
+                    list.Add(this.GetParent().GetNode<TextEdit>($"{field.Key}Value"));
+                }
+            }
+
+            if(list.Count >= TitleViewModel.Fields.Count)
+            {
+                (list.Where(ge => ge is TextEdit).Cast<TextEdit>().Where(te => te.Name == (TitleViewModel.Fields.First()).Key + "Value")).First().Text = (elementList as List<TitleViewModel>)[0].Name;
+            }
+        }
+    }
+
     private void onItemSelected(int index)
     {
         var id = int.Parse(((this.GetItemText(index)).Split(" "))[0]);
@@ -84,6 +138,16 @@ public class OptionButtonUpdate : OptionButton
         if(type == typeof(TestObject))
         {
             var selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, id);
+            this.GetParent().GetNode<TextEdit>("NameValue").Text = selectedElement.Name;
+        }
+        else if(type == typeof(ArtistViewModel))
+        {
+            var selectedElement = cemetery.GetObject<ArtistViewModel>(ElementProps.Id, id);
+            this.GetParent().GetNode<TextEdit>("NameValue").Text = selectedElement.Name;
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            var selectedElement = cemetery.GetObject<TitleViewModel>(ElementProps.Id, id);
             this.GetParent().GetNode<TextEdit>("NameValue").Text = selectedElement.Name;
         }
     }

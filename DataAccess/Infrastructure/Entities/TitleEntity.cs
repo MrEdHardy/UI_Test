@@ -18,7 +18,7 @@ namespace DataAccess.Infrastructure.Entities
         {
         }
 
-        internal TitleEntity(int? id, string name = null)
+        public TitleEntity(int? id, string name = null)
         {
             Id = id;
             Name = name;

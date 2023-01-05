@@ -20,19 +20,34 @@ public class CS_SimpleElement : Node
 //      
 //  }
 
-    private void displayContent(Godot.Object testObject, int index)
+    private void displayContent(int index)
     {
         var cemetery = GetNode<DataCemetery>("/root/Interface/DataCemetery");
-        var obj = testObject as TestObject;
-        var type = obj.GetType();
+        // var obj = testObject as TestObject;
+        var type = this.GetEntityPanel().GetCurrentType().GetType();
         
         // var objects = cemetery.GetObjects<TestObject>();
         // var selectedElement = (objects as List<TestObject>)[index];
 
-        var selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, index);
+        IEntityObject selectedElement = null;
 
-
-        GetParent().GetNode<TextEdit>("VBoxContainer/IdValue").Text = selectedElement.Id.ToString();
-        GetParent().GetNode<TextEdit>("VBoxContainer/NameValue").Text = selectedElement.Name;
+        if(type == typeof(ArtistViewModel))
+        {
+            selectedElement = cemetery.GetObject<ArtistViewModel>(ElementProps.Id, index);
+            GetParent().GetNode<TextEdit>("VBoxContainer/IdValue").Text = selectedElement.Id.ToString();
+            GetParent().GetNode<TextEdit>("VBoxContainer/NameValue").Text = (selectedElement as ArtistViewModel).Name;
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            selectedElement = cemetery.GetObject<TitleViewModel>(ElementProps.Id, index);
+            GetParent().GetNode<TextEdit>("VBoxContainer/IdValue").Text = selectedElement.Id.ToString();
+            GetParent().GetNode<TextEdit>("VBoxContainer/NameValue").Text = (selectedElement as TitleViewModel).Name;
+        }
+        else
+        {
+            selectedElement = cemetery.GetObject<TestObject>(ElementProps.Id, index);
+            GetParent().GetNode<TextEdit>("VBoxContainer/IdValue").Text = selectedElement.Id.ToString();
+            GetParent().GetNode<TextEdit>("VBoxContainer/NameValue").Text = (selectedElement as TestObject).Name;
+        }
     }
 }

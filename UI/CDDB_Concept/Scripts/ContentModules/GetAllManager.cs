@@ -10,6 +10,7 @@ public class GetAllManager : Node
     // private string b = "text";
     string name = string.Empty;
     ItemList itemList = null;
+    DataCemetery cemetery => this.GetDataCemetery();
     struct DemoObject
     {
         int Id;
@@ -43,7 +44,12 @@ public class GetAllManager : Node
     public void BindData(string name)
     {
         GD.Print($"Binding {name} data...");
-        fillItemListWithDemoData();
+
+        var h = this.GetDemoModeStatus();
+        if(this.GetEntityPanel().GetCurrentType().GetType() == typeof(TestObject))
+            fillItemListWithDemoData();
+        else
+            fillItemList();
     }
 
     private void fillItemListWithDemoData()
@@ -69,6 +75,32 @@ public class GetAllManager : Node
                 itemList.AddItem(test.ToString());
                 cemetery.SaveObject(test);
                 test = null;
+            }
+        }
+    }
+
+    private void fillItemList()
+    {
+        itemList.Clear();
+        var type = this.GetEntityPanel().GetCurrentType().GetType();
+        IEnumerable<IEntityObject> elementList = null;
+
+        if(type == typeof(ArtistViewModel))
+        {
+            elementList = cemetery.GetObjects<ArtistViewModel>();
+            (elementList as List<ArtistViewModel>).Sort(new EntityObjectComparer());
+            foreach (ArtistViewModel element in elementList)
+            {
+                itemList.AddItem(element.ToString());
+            }
+        }
+        else if(type == typeof(TitleViewModel))
+        {
+            elementList = cemetery.GetObjects<TitleViewModel>();
+            (elementList as List<TitleViewModel>).Sort(new EntityObjectComparer());
+            foreach (TitleViewModel element in elementList)
+            {
+                itemList.AddItem(element.ToString());
             }
         }
     }
