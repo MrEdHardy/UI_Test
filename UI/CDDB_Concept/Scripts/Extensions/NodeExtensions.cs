@@ -15,4 +15,10 @@ public static class NodeExtensions
         var boolean = node.GetNode<Settings>("/root/Interface").isDemoMode;
         return boolean;
     }
+
+    public static string GetBaseUrl(this Godot.Node node)
+    {
+        var url = node.GetNode<Settings>("/root/Interface").baseUrl;
+        return url;
+    }
 }

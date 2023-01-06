@@ -73,7 +73,7 @@ public class GameManager : Node
 		// await af.Update(addResult.Id, addResult);
         // cemetery.SaveObject(addResult);
         // var ele2 = cemetery.GetObjects<ArtistViewModel>();
-        var h = this.GetDemoModeStatus();
+        GD.Print("BaseUrl is: " + this.GetBaseUrl());
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -15,9 +15,15 @@ public class DataCemetery : Node
     //doch eher Friedhof->Gräber statt Müllkippe->Müllhaufen
     private Dictionary<object, Type> dataGraves = new Dictionary<object, Type>();
 
+    public ArtistFactory ArtistFactory;
+    public TitleFactory TitleFactory;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        var uri = new Uri(this.GetBaseUrl());
+        this.ArtistFactory = new ArtistFactory(uri);
+        this.TitleFactory = new TitleFactory(uri);
     }
 
     public void SaveObject<T>(T element)

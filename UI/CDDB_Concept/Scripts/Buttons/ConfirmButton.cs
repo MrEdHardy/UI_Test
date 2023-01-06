@@ -12,10 +12,8 @@ public class ConfirmButton : Button
     // private string b = "text";
     DataCemetery cemetery => this.GetDataCemetery();
     List<TextEdit> textInputs = new List<TextEdit>();
-
-    static string baseUrl = "http://localhost:6969/main.php/";
-    ArtistFactory artistFactory = new ArtistFactory(new Uri(baseUrl));
-    TitleFactory titleFactory = new TitleFactory(new Uri(baseUrl));
+    ArtistFactory artistFactory => cemetery.ArtistFactory;
+    TitleFactory titleFactory => cemetery.TitleFactory;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
