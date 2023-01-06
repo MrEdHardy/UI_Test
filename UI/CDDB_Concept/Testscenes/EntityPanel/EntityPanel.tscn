@@ -1,0 +1,179 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://interface/counter/label_bg.png" type="Texture" id=1]
+[ext_resource path="res://CDDB_Concept/Fonts/EntityPanel.tres" type="DynamicFont" id=2]
+[ext_resource path="res://CDDB_Concept/Scripts/Transceiver/CS_EntityPanel.cs" type="Script" id=6]
+[ext_resource path="res://CDDB_Concept/Scripts/Buttons/OKButton.cs" type="Script" id=7]
+[ext_resource path="res://CDDB_Concept/Scripts/EntityPanel/EntityPanel.cs" type="Script" id=8]
+[ext_resource path="res://CDDB_Concept/Scripts/Buttons/CrudButton.cs" type="Script" id=9]
+[ext_resource path="res://CDDB_Concept/Scripts/Container/CrudButtonContainer.cs" type="Script" id=10]
+[ext_resource path="res://CDDB_Concept/Scripts/Container/ContentContainer.cs" type="Script" id=11]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 1, 1, 1 )
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 1, 1, 1 )
+thickness = 5
+vertical = true
+
+[sub_resource type="Theme" id=4]
+default_font = ExtResource( 2 )
+
+[node name="EntityPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 8 )
+
+[node name="BG" type="TextureRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+texture = ExtResource( 1 )
+stretch_mode = 7
+
+[node name="HorLine" type="HSeparator" parent="."]
+anchor_right = 1.0
+margin_bottom = 200.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="VertLine" type="VSeparator" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -621.0
+margin_right = 480.0
+margin_bottom = -1.0
+custom_styles/separator = SubResource( 2 )
+
+[node name="EntityActions" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -620.0
+margin_right = 239.0
+custom_constants/separation = 0
+script = ExtResource( 10 )
+
+[node name="GetAll" type="Button" parent="EntityActions"]
+margin_right = 239.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 4 )
+text = "GetAll"
+flat = true
+script = ExtResource( 9 )
+operation = "GetAll"
+
+[node name="GetById" type="Button" parent="EntityActions"]
+margin_top = 100.0
+margin_right = 239.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 4 )
+text = "GetById"
+flat = true
+script = ExtResource( 9 )
+operation = "GetById"
+
+[node name="Add" type="Button" parent="EntityActions"]
+margin_top = 200.0
+margin_right = 239.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 4 )
+text = "Add"
+flat = true
+script = ExtResource( 9 )
+operation = "Add"
+
+[node name="Update" type="Button" parent="EntityActions"]
+margin_top = 300.0
+margin_right = 239.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 4 )
+text = "Update"
+flat = true
+script = ExtResource( 9 )
+operation = "Update"
+
+[node name="Delete" type="Button" parent="EntityActions"]
+margin_top = 400.0
+margin_right = 239.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 4 )
+text = "Delete"
+flat = true
+script = ExtResource( 9 )
+operation = "Delete"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+margin_left = 243.0
+margin_top = 621.0
+margin_right = 1281.0
+margin_bottom = 721.0
+alignment = 1
+
+[node name="OKButton" type="Button" parent="ButtonContainer"]
+margin_left = 397.0
+margin_right = 497.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+theme = SubResource( 4 )
+text = "OK"
+flat = true
+script = ExtResource( 7 )
+
+[node name="Refresh" type="Button" parent="ButtonContainer"]
+margin_left = 501.0
+margin_right = 640.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+theme = SubResource( 4 )
+text = "Refresh"
+flat = true
+
+[node name="EntityName" type="Label" parent="."]
+margin_right = 1028.0
+margin_bottom = 37.0
+theme = SubResource( 4 )
+text = "EntityName"
+valign = 1
+
+[node name="Content" type="ScrollContainer" parent="."]
+anchor_left = 0.189063
+anchor_top = 0.140278
+anchor_right = 1.00156
+anchor_bottom = 0.859722
+margin_left = -1.00064
+margin_top = -0.000160217
+margin_right = -0.996826
+margin_bottom = -0.000183105
+rect_min_size = Vector2( 520, 259 )
+mouse_filter = 2
+scroll_horizontal_enabled = false
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+show_behind_parent = true
+margin_right = 1028.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 1028, 518 )
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="CS_EntityPanel" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[connection signal="button_up" from="EntityActions/GetAll" to="EntityActions/GetAll" method="onButtonUp"]
+[connection signal="button_up" from="EntityActions/GetById" to="EntityActions/GetById" method="onButtonUp"]
+[connection signal="button_up" from="EntityActions/Add" to="EntityActions/Add" method="onButtonUp"]
+[connection signal="button_up" from="EntityActions/Update" to="EntityActions/Update" method="onButtonUp"]
+[connection signal="button_up" from="EntityActions/Delete" to="EntityActions/Delete" method="onButtonUp"]
+[connection signal="button_up" from="ButtonContainer/OKButton" to="ButtonContainer/OKButton" method="_on_OKButton_button_up"]

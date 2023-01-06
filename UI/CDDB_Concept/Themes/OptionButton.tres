@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://interface/theme/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://CDDB_Concept/Styles/OptionButton/States/pressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://CDDB_Concept/Styles/OptionButton/States/focused.tres" type="StyleBox" id=3]
+[ext_resource path="res://CDDB_Concept/Styles/OptionButton/States/normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://CDDB_Concept/Styles/OptionButton/States/hover.tres" type="StyleBox" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[resource]
+resource_local_to_scene = true
+default_font = SubResource( 1 )
+OptionButton/styles/focus = ExtResource( 3 )
+OptionButton/styles/hover = ExtResource( 5 )
+OptionButton/styles/normal = ExtResource( 4 )
+OptionButton/styles/pressed = ExtResource( 2 )

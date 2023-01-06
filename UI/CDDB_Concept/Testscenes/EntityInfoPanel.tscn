@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://interface/counter/label_bg.png" type="Texture" id=1]
+[ext_resource path="res://CDDB_Concept/Themes/EntityPanel_Button_Theme.tres" type="Theme" id=2]
+[ext_resource path="res://CDDB_Concept/Testscenes/EntityPanel/ElementScenes/SimpleObject.tscn" type="PackedScene" id=3]
+[ext_resource path="res://CDDB_Concept/Scripts/Transceiver/CS_EntityInfoPanel.cs" type="Script" id=4]
+[ext_resource path="res://CDDB_Concept/Scripts/Container/EntityInfoPanelContainer.cs" type="Script" id=5]
+[ext_resource path="res://CDDB_Concept/Scripts/Buttons/OKButton.cs" type="Script" id=6]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 1, 1, 1 )
+thickness = 5
+
+[node name="EntityInfoPanel" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -360.0
+margin_right = 320.0
+margin_bottom = 360.0
+mouse_filter = 2
+
+[node name="Content" type="ScrollContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -307.5
+margin_right = 310.0
+margin_bottom = 307.5
+rect_min_size = Vector2( 630, 615 )
+scroll_horizontal_enabled = false
+script = ExtResource( 5 )
+
+[node name="InnerContent" type="VBoxContainer" parent="Content"]
+margin_right = 630.0
+margin_bottom = 615.0
+rect_min_size = Vector2( 630, 615 )
+
+[node name="SampleText" type="Label" parent="Content/InnerContent"]
+visible = false
+margin_right = 630.0
+margin_bottom = 37.0
+theme = ExtResource( 2 )
+text = "Text"
+autowrap = true
+
+[node name="Element" parent="Content/InnerContent" instance=ExtResource( 3 )]
+margin_right = 630.0
+
+[node name="Element2" parent="Content/InnerContent" instance=ExtResource( 3 )]
+visible = false
+margin_top = 304.0
+margin_right = 630.0
+margin_bottom = 563.0
+
+[node name="Element3" parent="Content/InnerContent" instance=ExtResource( 3 )]
+visible = false
+margin_top = 567.0
+margin_right = 630.0
+margin_bottom = 826.0
+
+[node name="HSeparator" type="HSeparator" parent="."]
+anchor_right = 1.0
+margin_bottom = 100.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 640.0
+margin_bottom = 49.0
+theme = ExtResource( 2 )
+text = "SingleEntity"
+align = 1
+valign = 1
+
+[node name="LowerSideButtonContainer" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+alignment = 1
+
+[node name="OKButton" type="Button" parent="LowerSideButtonContainer"]
+margin_left = 222.0
+margin_right = 284.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+theme = ExtResource( 2 )
+text = "OK"
+flat = true
+script = ExtResource( 6 )
+
+[node name="CancelButton" type="Button" parent="LowerSideButtonContainer"]
+margin_left = 288.0
+margin_right = 418.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+theme = ExtResource( 2 )
+text = "Cancel"
+flat = true
+
+[node name="BG" type="TextureRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 0.998611
+mouse_filter = 2
+texture = ExtResource( 1 )
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CS_EntityInfoPanel" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[connection signal="button_up" from="LowerSideButtonContainer/OKButton" to="LowerSideButtonContainer/OKButton" method="_on_OKButton_button_up"]
