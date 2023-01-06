@@ -54,6 +54,7 @@ thickness = 3
 
 [node name="Interface" type="Node"]
 script = ExtResource( 14 )
+baseUrl = "http://localhost:6969/main.php/"
 
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0

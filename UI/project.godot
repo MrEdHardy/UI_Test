@@ -12,6 +12,7 @@ config_version=4
 
 config/name="Ui Test"
 run/main_scene="res://CDDB_Concept/Testscenes/Floorplan.tscn"
+boot_splash/show_image=false
 config/icon="res://icon.png"
 
 [display]
