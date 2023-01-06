@@ -12,11 +12,9 @@ namespace DataAccess.Infrastructure.Factories
 {
     public class MediumCollectionFactory : EntityFactory<MediumCollectionEntity>
     {
-        public MediumCollectionFactory(Uri baseUri) : base(baseUri)
+        public MediumCollectionFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
-
-        protected internal override string controller => "mediumcollection/";
 
         internal override JsonSerializerOptions serializerOptions
         {

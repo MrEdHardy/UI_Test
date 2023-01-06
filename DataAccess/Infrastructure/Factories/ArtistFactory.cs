@@ -17,11 +17,9 @@ namespace DataAccess.Infrastructure.Factories
 {
     public sealed class ArtistFactory : EntityFactory<ArtistEntity>
     {
-        public ArtistFactory(Uri baseUri) : base(baseUri)
+        public ArtistFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
-
-        protected internal override string controller => "artists/";
 
         internal override JsonSerializerOptions serializerOptions
         {

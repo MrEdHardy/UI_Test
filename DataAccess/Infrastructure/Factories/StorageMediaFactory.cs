@@ -17,11 +17,9 @@ namespace DataAccess.Infrastructure.Factories
 {
     public sealed class StorageMediaFactory : EntityFactory<StorageMediaEntity>
     {
-        public StorageMediaFactory(Uri baseUri) : base(baseUri)
+        public StorageMediaFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
-
-        protected internal override string controller => "storagemedia/";
 
         internal override JsonSerializerOptions serializerOptions
         {

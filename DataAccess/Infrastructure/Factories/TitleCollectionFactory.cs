@@ -12,9 +12,6 @@ namespace DataAccess.Infrastructure.Factories
 {
     public sealed class TitleCollectionFactory : EntityFactory<TitleCollectionEntity>
     {
-
-        protected internal override string controller { get => "artists/"; }
-
         internal override JsonSerializerOptions serializerOptions
         {
             get
@@ -27,7 +24,7 @@ namespace DataAccess.Infrastructure.Factories
                 };
             }
         }
-        public TitleCollectionFactory(Uri baseUri) : base(baseUri)
+        public TitleCollectionFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
     }

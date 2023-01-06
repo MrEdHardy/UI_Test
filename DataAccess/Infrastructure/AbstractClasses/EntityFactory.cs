@@ -2,43 +2,38 @@
 using DataAccess.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DataAccess.Infrastructure.Enums;
-using Microsoft.Extensions.Configuration;
-using DataAccess.Infrastructure.ConfigurationHelpers;
-using DataAccess.Infrastructure.Entities;
+
 
 namespace DataAccess.Infrastructure.AbstractClasses
 {
     public abstract class EntityFactory<T> : IEntityFactory<T>
         where T : class
     {
-        protected internal abstract string controller { get; }
         protected internal Dictionary<string, string> actionPathDefinitions { get; }
         internal abstract JsonSerializerOptions serializerOptions { get; }
-        internal Uri pathToController{ get => new Uri(baseUri, controller); }
+        internal Uri pathToController{ get { return this.baseUri; } }
         private Uri baseUri;
 
-        public EntityFactory(Uri baseUri)
+        public EntityFactory(Uri baseUri, Dictionary<string, string> paths)
         {
             this.baseUri = baseUri;
-            var controller = string.Empty;
-            if(typeof(T).Equals(typeof(TitleCollectionEntity)))
-            {
-                controller = "titlecollections/";
-            }
-            else if(typeof(T).Equals(typeof(ArtistCollectionEntity)))
-            {
-                controller = "artistcollections/";
-            }
-            else
-            {
-                controller = this.controller;
-            }
-            this.actionPathDefinitions = ConfigurationHelper.GetPathDefinitions(controller.AsSpan());
+            //var controller = string.Empty;
+            //if(typeof(T).Equals(typeof(TitleCollectionEntity)))
+            //{
+            //    controller = "titlecollections/";
+            //}
+            //else if(typeof(T).Equals(typeof(ArtistCollectionEntity)))
+            //{
+            //    controller = "artistcollections/";
+            //}
+            //else
+            //{
+            //    controller = this.controller;
+            //}
+            this.actionPathDefinitions = paths;
         }
 
         public async Task<T> Add(T entity)

@@ -17,8 +17,6 @@ namespace DataAccess.Infrastructure.Factories
 {
     public sealed class LocationFactory : EntityFactory<LocationEntity>
     {
-        protected internal override string controller => "locations/";
-
         internal override JsonSerializerOptions serializerOptions
         {
             get
@@ -32,7 +30,7 @@ namespace DataAccess.Infrastructure.Factories
             }
         }
 
-        public LocationFactory(Uri baseUri) : base(baseUri)
+        public LocationFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
     }
