@@ -15,6 +15,8 @@ public sealed class ArtistViewModel : IEntityObject
 
     public string Name { get { return this.name; }  set { this.name = value; } }
 
+    public string Controller { get { return "artists/"; } private set { this.Controller = value; } }
+
     internal ArtistViewModel(int id, string name)
     {
         this.id = id;
@@ -28,6 +30,11 @@ public sealed class ArtistViewModel : IEntityObject
     public override string ToString()
     {
         return string.Concat(Id, " ", Name);
+    }
+
+    public void SetController(string controller)
+    {
+        this.Controller = controller;
     }
 
     public static implicit operator ArtistEntity(ArtistViewModel viewModel)

@@ -10,15 +10,8 @@ public static class NodeExtensions
         return node.GetNode<EntityPanel>("/root/Interface/UI/EntityPanel");
     }
 
-    public static bool GetDemoModeStatus(this Godot.Node node)
+    public static Settings GetSettings(this Godot.Node node)
     {
-        var boolean = node.GetNode<Settings>("/root/Interface").isDemoMode;
-        return boolean;
-    }
-
-    public static string GetBaseUrl(this Godot.Node node)
-    {
-        var url = node.GetNode<Settings>("/root/Interface").baseUrl;
-        return url;
+        return node.GetNode<Settings>("/root/Interface");
     }
 }

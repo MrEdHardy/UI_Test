@@ -12,11 +12,9 @@ namespace DataAccess.Infrastructure.Factories
 {
     public sealed class ArtistCollectionFactory : EntityFactory<ArtistCollectionEntity>
     {
-        public ArtistCollectionFactory(Uri baseUri) : base(baseUri)
+        public ArtistCollectionFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
-
-        protected internal override string controller => "storagemedia/";
 
         internal override JsonSerializerOptions serializerOptions
         {

@@ -15,6 +15,8 @@ internal sealed class TitleViewModel : IEntityObject
 
     public string Name { get { return this.name; }  set { this.name = value; } }
 
+    public string Controller { get { return "titles/"; } private set { this.Controller = value; } }
+
     internal TitleViewModel(int id, string name)
     {
         this.id = id;
@@ -28,6 +30,11 @@ internal sealed class TitleViewModel : IEntityObject
     public override string ToString()
     {
         return string.Concat(Id, " ", Name);
+    }
+
+    public void SetController(string controller)
+    {
+        this.Controller = controller;
     }
 
     public static implicit operator TitleEntity(TitleViewModel viewModel)

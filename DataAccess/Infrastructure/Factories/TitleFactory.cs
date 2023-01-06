@@ -17,11 +17,9 @@ namespace DataAccess.Infrastructure.Factories
 {
     public class TitleFactory : EntityFactory<TitleEntity>
     {
-        public TitleFactory(Uri baseUri) : base(baseUri)
+        public TitleFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
-
-        protected internal override string controller => "titles/";
 
         internal override JsonSerializerOptions serializerOptions
         {

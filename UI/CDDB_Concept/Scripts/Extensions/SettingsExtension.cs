@@ -10,4 +10,16 @@ internal static class SettingsExtension
         file.Close();
         return jsonFile;
     }
+
+    internal static bool GetDemoModeStatus(this Godot.Node node)
+    {
+        var boolean = node.GetSettings().isDemoMode;
+        return boolean;
+    }
+
+    internal static string GetBaseUrl(this Godot.Node node)
+    {
+        var url = node.GetSettings().baseUrl;
+        return url;
+    }
 }

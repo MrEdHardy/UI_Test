@@ -15,7 +15,7 @@ namespace DataAccess.Infrastructure.Factories
 {
     public sealed class MediumFactory : EntityFactory<MediumEntity>
     {
-        public MediumFactory(Uri baseUri) : base(baseUri)
+        public MediumFactory(Uri baseUri, Dictionary<string, string> paths) : base(baseUri, paths)
         {
         }
 
@@ -31,7 +31,5 @@ namespace DataAccess.Infrastructure.Factories
                 };
             }
         }
-
-        protected internal override string controller => "media/";
     }
 }
