@@ -74,9 +74,6 @@ public class GameManager : Node
         // cemetery.SaveObject(addResult);
         // var ele2 = cemetery.GetObjects<ArtistViewModel>();
         GD.Print("BaseUrl is: " + this.GetBaseUrl());
-        GD.Print("Api Controller: " + ArtistViewModel.Controller);
-        ArtistViewModel.SetController("baum/");
-        GD.Print("Api Controller:changed " + ArtistViewModel.Controller);
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
