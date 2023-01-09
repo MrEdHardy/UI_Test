@@ -15,7 +15,7 @@ internal static class ConfigHelper
     internal static Dictionary<string, string> GetPathDefinitions(string controller, string json)
     {
         return CreateConfiguration(json)
-            .GetSection($"Paths:{controller.ToString()}")
+            .GetSection($"Paths:{controller}")
             .Get<Dictionary<string, string>>();
     }
 }

@@ -5,22 +5,25 @@ using Godot;
 
 public sealed class ArtistViewModel : IEntityObject
 {
-    private int id;
-    private string name;
-    public int Id { get { return this.id; } }
+    private int _id;
+    private string _name;
+    public int Id { get { return this._id; } }
     public static readonly Dictionary<string, Type> Fields = new Dictionary<string, Type>()
     {
         {"Name", typeof(TextEdit)}
     };
 
-    public string Name { get { return this.name; }  set { this.name = value; } }
+    public string Name { get { return this._name; }  set { this._name = value; } }
 
-    public string Controller { get { return "artists/"; } private set { this.Controller = value; } }
+    private static string _controller = "artists/";
+    public static string Controller { get { return _controller; } private set { _controller = value; } }
+
+    private readonly static object lockObject = new object();
 
     internal ArtistViewModel(int id, string name)
     {
-        this.id = id;
-        this.name = name;
+        this._id = id;
+        this._name = name;
     }
 
     private ArtistViewModel()
@@ -32,9 +35,10 @@ public sealed class ArtistViewModel : IEntityObject
         return string.Concat(Id, " ", Name);
     }
 
-    public void SetController(string controller)
+    public static void SetController(string controller)
     {
-        this.Controller = controller;
+        lock (lockObject)
+            Controller = controller;
     }
 
     public static implicit operator ArtistEntity(ArtistViewModel viewModel)

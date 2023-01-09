@@ -5,22 +5,24 @@ using Godot;
 
 internal sealed class TitleViewModel : IEntityObject
 {
-    private int id;
-    private string name;
-    public int Id { get { return this.id; } }
+    private int _id;
+    private string _name;
+    public int Id { get { return this._id; } }
     public static readonly Dictionary<string, Type> Fields = new Dictionary<string, Type>()
     {
         {"Name", typeof(TextEdit)}
     };
 
-    public string Name { get { return this.name; }  set { this.name = value; } }
+    public string Name { get { return this._name; }  set { this._name = value; } }
 
-    public string Controller { get { return "titles/"; } private set { this.Controller = value; } }
+    private static string _controller = "titles/";
+    public static string Controller { get { return _controller; } private set { _controller = value; } }
+    private readonly static object lockObject = new object();
 
     internal TitleViewModel(int id, string name)
     {
-        this.id = id;
-        this.name = name;
+        this._id = id;
+        this._name = name;
     }
 
     private TitleViewModel()
@@ -32,9 +34,10 @@ internal sealed class TitleViewModel : IEntityObject
         return string.Concat(Id, " ", Name);
     }
 
-    public void SetController(string controller)
+    public static void SetController(string controller)
     {
-        this.Controller = controller;
+        lock (lockObject)
+            Controller = controller;
     }
 
     public static implicit operator TitleEntity(TitleViewModel viewModel)

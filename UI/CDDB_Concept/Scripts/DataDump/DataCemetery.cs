@@ -138,13 +138,8 @@ public class DataCemetery : Node
     {
         var configFile = this.GetSettings().GetConfigFile();
         var uri = new Uri(this.GetBaseUrl());
-        var emptyArtist = new ArtistViewModel(default, default);
-        var emptyTitle = new TitleViewModel(default, default);
-        this.ArtistFactory = new ArtistFactory(new Uri(uri, emptyArtist.Controller), ConfigHelper.GetPathDefinitions(emptyArtist.Controller, configFile));
-        this.TitleFactory = new TitleFactory(new Uri(uri, emptyTitle.Controller), ConfigHelper.GetPathDefinitions(emptyTitle.Controller, configFile));
-
-        emptyArtist = null;
-        emptyTitle = null;
+        this.ArtistFactory = new ArtistFactory(new Uri(uri, ArtistViewModel.Controller), ConfigHelper.GetPathDefinitions(ArtistViewModel.Controller, configFile));
+        this.TitleFactory = new TitleFactory(new Uri(uri, TitleViewModel.Controller), ConfigHelper.GetPathDefinitions(TitleViewModel.Controller, configFile));
 
         // ATTENTION!!!! USE THE FOLLOWING FOR ARTISTCOLLECTIONFACTORY & TITLECOLLECTIONFACTORY!!!!!
         // this.ArtistCollectionFactory = new ArtistCollectionFactory(new Uri(uri, "artists/"), ConfigHelper.GetPathDefinitions(emptyAC.Controller, configFile));
