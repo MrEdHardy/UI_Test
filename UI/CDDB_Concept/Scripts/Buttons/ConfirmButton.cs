@@ -14,11 +14,12 @@ public class ConfirmButton : Button
     List<TextEdit> textInputs = new List<TextEdit>();
     ArtistFactory artistFactory => cemetery.ArtistFactory;
     TitleFactory titleFactory => cemetery.TitleFactory;
+    ItemList titleList = null;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        titleList = this.GetParent().GetNodeOrNull<ItemList>("ScrollContainer/VBoxContainer/TitleList");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

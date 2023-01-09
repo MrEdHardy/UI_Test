@@ -21,7 +21,7 @@ namespace DataAccess.Infrastructure.Entities
         {
         }
 
-        internal TitleCollectionEntity(int? id, int titleId, int artistId)
+        public TitleCollectionEntity(int? id, int titleId, int artistId)
         {
             Id = id;
             TitleId = titleId;

@@ -26,7 +26,8 @@
       "getbyid": "gettitlebyid",
       "add": "addtitle",
       "update": "updateTitle",
-      "delete": "deletetitle"
+      "delete": "deletetitle",
+      "getallbyartistid": "gettitlesbyartistId"
     },
     "locations/": {
       "getall": "getalllocations",

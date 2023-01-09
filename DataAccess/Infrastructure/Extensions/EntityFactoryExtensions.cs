@@ -22,14 +22,14 @@ namespace DataAccess.Infrastructure.Extensions
             where T : class
         {
             return await ApiCaller
-                .Call<List<T>>(pathToAction, ApiCallType.Simple, Method.Get, null, null, null); ;
+                .Call<List<T>>(pathToAction, ApiCallType.Simple, Method.Get, null, null, null);
         }
 
-        internal async static Task<List<T>> GetEntityByParam<T>(this EntityFactory<T> factory, Uri pathToAction, ApiCallType callType, string queryfieldValue, string queryfield = null)
+        internal async static Task<List<T>> GetEntityByParam<T>(this EntityFactory<T> factory, Uri pathToAction, ApiCallType callType, string queryfieldValue, string queryfield = null, string jsonBody = null)
             where T : class
         {
             return await ApiCaller
-                .Call<List<T>>(pathToAction, callType, Method.Get, queryfield, queryfieldValue, null); ;
+                .Call<List<T>>(pathToAction, callType, Method.Get, queryfield, queryfieldValue, jsonBody);
         }
 
         internal async static Task<T> AddEntity<T>(this EntityFactory<T> factory, Uri pathToAction, T entity)

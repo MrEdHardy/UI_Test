@@ -1,3 +1,5 @@
+using System;
+
 public static class NodeExtensions
 {
     public static DataCemetery GetDataCemetery(this Godot.Node node)
@@ -13,5 +15,10 @@ public static class NodeExtensions
     public static Settings GetSettings(this Godot.Node node)
     {
         return node.GetNode<Settings>("/root/Interface");
+    }
+
+    public static Type GetCurrentType(this Godot.Node node)
+    {
+        return node.GetEntityPanel().GetCurrentType().GetType();
     }
 }

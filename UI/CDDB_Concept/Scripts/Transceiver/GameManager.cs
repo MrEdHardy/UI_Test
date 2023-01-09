@@ -1,4 +1,5 @@
 using DataAccess.Infrastructure.Entities;
+using DataAccess.Infrastructure.Extensions;
 using DataAccess.Infrastructure.Factories;
 using Godot;
 using System;
@@ -23,56 +24,8 @@ public class GameManager : Node
     public override async void _Ready()
     {
         registerSignals();
-        // var test = new TestObject("blub", 1);
-        // var node = GetNode<Node>("/root/Interface/DataCemetery");
-        // var graveyard = GetNode<Node>("/root/Interface/DataCemetery");
-
-        // var script = graveyard.GetNode<DataCemetery>("./");
-        // script.SaveObject(test);
-        // var arr = script.GetObjects<TestObject>();
-        // var obj = script.GetObject<TestObject>(ElementProps.Id, 1);
-        // script.DeleteObject(test);
-        // var obj1 = script.GetObject<TestObject>(ElementProps.Id, 1);
-
-        // var dict = new Dictionary<object, Type>();
-        // var list = new List<TestObject>();
-        // for (int i = 0; i < 10; i++)
-        // {   
-        //     list.Add(new TestObject("Jannice", i));
-        //     dict.Add(list[i], typeof(TestObject));
-        // }
-        // script.SaveObjectRange(dict);
-        // var eleArray = script.GetObjects<TestObject>();
-        // var obj2 = script.GetObject<TestObject>(ElementProps.Id, 2);
-        // var objNullId = script.GetObject<TestObject>(ElementProps.Id, null);
-        // var objNone = script.GetObject<TestObject>(ElementProps.None, null);
-        // var objCustomValue = script.GetObject<TestObject>(ElementProps.Custom, "Jannice", "Name");
-        // var objCustomValueNull = script.GetObject<TestObject>(ElementProps.Custom, string.Empty);
-        // script.DeleteObjects(list);
-        // var obj3 = script.GetObject<TestObject>(ElementProps.Id, 2);
-        // var eleArray1 = script.GetObjects<TestObject>();
-
-        // string baseUrl = "http://localhost:6969/main.php/";
-        // var af = new ArtistFactory(new Uri(baseUrl));
-		// var resultAll = await af.GetAll();
-        // var resultId = await af.GetById(2);
-		// var addResult = await af.Add(new ArtistEntity { Name = "Artist" });
-		// addResult.Name = "Changed!";
-		// await af.Update(addResult.Id.Value, addResult);
-		// await af.Delete(addResult.Id.Value);
-        // var resultAll1 = await af.GetAll();
         var cemetery = this.GetDataCemetery();
         await cemetery.FillWithApiData();
-        // var ele = cemetery.GetObjects<ArtistViewModel>();
-        // string baseUrl = "http://localhost:6969/main.php/";
-        // var af = new ArtistFactory(new Uri(baseUrl));
-        // ArtistViewModel addResult = await af.Add(new ArtistEntity { Name = "Artist" });
-        // cemetery.SaveObject(addResult);
-        // var ele1 = cemetery.GetObjects<ArtistViewModel>();
-        // addResult.Name = "Changed!";
-		// await af.Update(addResult.Id, addResult);
-        // cemetery.SaveObject(addResult);
-        // var ele2 = cemetery.GetObjects<ArtistViewModel>();
         GD.Print("BaseUrl is: " + this.GetBaseUrl());
     }
 
