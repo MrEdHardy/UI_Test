@@ -35,4 +35,9 @@ public class EntityButton : Node
     {
         EmitSignal("EntityButtonPress", this.Name);
     }
+
+    private void onStorageMediaButtonUp()
+    {
+        EmitSignal(nameof(EntityButtonPress), this.Name);
+    }
 }
