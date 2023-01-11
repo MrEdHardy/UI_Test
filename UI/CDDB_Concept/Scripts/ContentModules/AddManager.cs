@@ -30,7 +30,8 @@ public class AddManager : Node
         if(currentType == typeof(ArtistViewModel))
         {
             if(titleList != null)
-            {
+            {   
+                titleList.Clear();
                 var titles = this.GetDataCemetery().GetObjects<TitleViewModel>();
                 foreach (var title in titles)
                 {

@@ -61,6 +61,7 @@ theme = ExtResource( 2 )
 text = "Values"
 
 [node name="AdditionalLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+visible = false
 margin_top = 159.0
 margin_right = 1020.0
 margin_bottom = 196.0
@@ -69,9 +70,10 @@ theme = SubResource( 4 )
 text = "Additional Attribute"
 
 [node name="AdditionalValue" type="TextEdit" parent="ScrollContainer/VBoxContainer"]
-margin_top = 200.0
+visible = false
+margin_top = 159.0
 margin_right = 1020.0
-margin_bottom = 250.0
+margin_bottom = 209.0
 rect_min_size = Vector2( 515, 50 )
 theme = ExtResource( 2 )
 text = "Value

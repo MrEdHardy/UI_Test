@@ -17,7 +17,7 @@ namespace DataAccess.Infrastructure.Entities
         [JsonPropertyName("KünstlerId")]
         public int ArtistId { get; set; }
 
-        public TitleCollectionEntity()
+        internal TitleCollectionEntity()
         {
         }
 

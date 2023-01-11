@@ -15,10 +15,8 @@ public sealed class ArtistViewModel : IEntityObject
 
     public string Name { get { return this._name; }  set { this._name = value; } }
 
-    private static string _controller = "artists/";
-    public static string Controller { get { return _controller; } private set { _controller = value; } }
-
-    private readonly static object lockObject = new object();
+    private string _controller = "artists/";
+    public string Controller { get { return this._controller; } set { this._controller = value; } }
 
     internal ArtistViewModel(int id, string name)
     {
@@ -35,10 +33,9 @@ public sealed class ArtistViewModel : IEntityObject
         return string.Concat(Id, " ", Name);
     }
 
-    public static void SetController(string controller)
+    public void SetController(string controller)
     {
-        lock (lockObject)
-            Controller = controller;
+        this.Controller = controller;
     }
 
     public static implicit operator ArtistEntity(ArtistViewModel viewModel)

@@ -3,9 +3,11 @@ using DataAccess.Infrastructure.Entities;
 internal sealed class TitleCollectionViewModel : IEntityObject
 {
     private int _id;
+    private string _controller = "titlecollections/";
     public int Id { get { return this._id; }}
     public int TitleId { get; set; }
     public int ArtistId { get; set; }
+    public string Controller { get { return this._controller; } set { this._controller = value; } }
 
     internal TitleCollectionViewModel(int id, int titleId, int artistId)
     {

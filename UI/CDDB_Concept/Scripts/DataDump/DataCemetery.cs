@@ -4,7 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using DataAccess.Infrastructure.Factories;
 using System.Threading.Tasks;
-using DataAccess.Infrastructure.Entities;
 
 public class DataCemetery : Node
 {
@@ -17,6 +16,7 @@ public class DataCemetery : Node
 
     public ArtistFactory ArtistFactory;
     public TitleFactory TitleFactory;
+    public TitleCollectionFactory TitleCollectionFactory;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -138,12 +138,16 @@ public class DataCemetery : Node
     {
         var configFile = this.GetSettings().GetConfigFile();
         var uri = new Uri(this.GetBaseUrl());
-        this.ArtistFactory = new ArtistFactory(new Uri(uri, ArtistViewModel.Controller), ConfigHelper.GetPathDefinitions(ArtistViewModel.Controller, configFile));
-        this.TitleFactory = new TitleFactory(new Uri(uri, TitleViewModel.Controller), ConfigHelper.GetPathDefinitions(TitleViewModel.Controller, configFile));
+        var emptyArtist = new ArtistViewModel(default, default);
+        var emptyTitle = new TitleViewModel(default, default);
+        var emptyTC = new TitleCollectionViewModel(default, default, default);
+        this.ArtistFactory = new ArtistFactory(new Uri(uri, emptyArtist.Controller), ConfigHelper.GetPathDefinitions(emptyArtist.Controller, configFile));
+        this.TitleFactory = new TitleFactory(new Uri(uri, emptyTitle.Controller), ConfigHelper.GetPathDefinitions(emptyTitle.Controller, configFile));
+        this.TitleCollectionFactory = new TitleCollectionFactory(new Uri(uri, "artists/"), ConfigHelper.GetPathDefinitions(emptyTC.Controller, configFile));
 
         // ATTENTION!!!! USE THE FOLLOWING FOR ARTISTCOLLECTIONFACTORY & TITLECOLLECTIONFACTORY!!!!!
-        // this.ArtistCollectionFactory = new ArtistCollectionFactory(new Uri(uri, "artists/"), ConfigHelper.GetPathDefinitions(emptyAC.Controller, configFile));
-        // this.TitleCollectionFactory = new TitleCollectionFactory(new Uri(uri, "titles/"), ConfigHelper.GetPathDefinitions(emptyTC.Controller, configFile));
+        // this.ArtistCollectionFactory = new ArtistCollectionFactory(new Uri(uri, "storagemedia/"), ConfigHelper.GetPathDefinitions(emptyAC.Controller, configFile));
+        // this.TitleCollectionFactory = new TitleCollectionFactory(new Uri(uri, "artists/"), ConfigHelper.GetPathDefinitions(emptyTC.Controller, configFile));
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

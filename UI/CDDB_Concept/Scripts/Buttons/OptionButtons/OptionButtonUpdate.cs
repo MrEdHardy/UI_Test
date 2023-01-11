@@ -10,11 +10,12 @@ public class OptionButtonUpdate : OptionButton
     // private int a = 2;
     // private string b = "text";
     DataCemetery cemetery => this.GetDataCemetery();
+    ItemList titleList = null;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        titleList = this.GetParent().GetNodeOrNull<ItemList>("TitleList");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,6 +103,45 @@ public class OptionButtonUpdate : OptionButton
             if(list.Count >= ArtistViewModel.Fields.Count)
             {
                 (list.Where(ge => ge is TextEdit).Cast<TextEdit>().Where(te => te.Name == (ArtistViewModel.Fields.First()).Key + "Value")).First().Text = (elementList as List<ArtistViewModel>)[0].Name;
+            }
+
+            if(titleList != null)
+            {
+                var firstArtist = (elementList as List<ArtistViewModel>)[0];
+                var titleCollections = cemetery.GetObjects<TitleCollectionViewModel>().Where(tc => tc.ArtistId == firstArtist.Id).ToList();
+                titleList.Hide();
+                if(titleCollections.Count > 0)
+                {
+                    var allTitles = cemetery.GetObjects<TitleViewModel>();
+                    var artistTitles = new List<TitleViewModel>();
+                    foreach (var tc in titleCollections)
+                    {
+                        foreach (var t in allTitles)
+                        {
+                            if(tc.TitleId == t.Id)
+                                artistTitles.Add(t);
+                        }
+                    }
+
+                    (allTitles as List<TitleViewModel>).Sort(new EntityObjectComparer());
+                    foreach (var title in allTitles)
+                    {
+                        titleList.AddItem(title.ToString());
+                    }
+
+                    artistTitles.Sort(new EntityObjectComparer());
+                    foreach (var selectedTitle in artistTitles)
+                    {
+                        int index = (allTitles as List<TitleViewModel>).FindIndex(t => t.Id == selectedTitle.Id);
+                        GD.Print("Index: " + index);
+                        if(index != -1)
+                        {
+                            titleList.Select(index, true);
+                        }
+                    }
+
+                    titleList.Show();
+                }
             }
         }
         else if(type == typeof(TitleViewModel))

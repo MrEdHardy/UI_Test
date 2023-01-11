@@ -72,6 +72,18 @@ public class ConfirmButton : Button
             ArtistViewModel viewModel = await artistFactory.Add(new ArtistEntity(id: null, name: name));
             debugElement = viewModel;
             cemetery.SaveObject(viewModel);
+            if(titleList != null)
+            {
+                var selectedIndezes = titleList.GetSelectedItems();
+                foreach (var index in selectedIndezes)
+                {
+                    var titleId = int.Parse(titleList.GetItemText(index).Split(" ")[0]);
+                    var titleCollection = await this.GetDataCemetery().TitleCollectionFactory.Add(new TitleCollectionEntity(id: null, titleId: titleId, artistId: viewModel.Id));
+                    TitleCollectionViewModel titleCollectionViewModel = titleCollection;
+                    cemetery.SaveObject(titleCollectionViewModel);
+                    GD.Print("I created following TitleCollection: " + titleCollectionViewModel.ToString());
+                }
+            } 
         }
         else if(type == typeof(TitleViewModel))
         {

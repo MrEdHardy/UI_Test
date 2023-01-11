@@ -60,10 +60,14 @@ public sealed class ContentContainer : Node
         else if(operation == CrudOperations.Add)
         {
             path = "Add.tscn";
+            if(this.GetCurrentType() == typeof(ArtistViewModel))
+                path = "AddArtist.tscn";
         }
         else if(operation == CrudOperations.Update)
         {
             path = "Update.tscn";
+            if(this.GetCurrentType() == typeof(ArtistViewModel))
+                path = "UpdateArtist.tscn";
         }
         else if(operation == CrudOperations.Delete)
         {

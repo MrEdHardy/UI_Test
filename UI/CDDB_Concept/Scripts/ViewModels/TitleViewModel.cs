@@ -15,9 +15,8 @@ internal sealed class TitleViewModel : IEntityObject
 
     public string Name { get { return this._name; }  set { this._name = value; } }
 
-    private static string _controller = "titles/";
-    public static string Controller { get { return _controller; } private set { _controller = value; } }
-    private readonly static object lockObject = new object();
+    private string _controller = "titles/";
+    public string Controller { get { return this._controller; } set { this._controller = value; } }
 
     internal TitleViewModel(int id, string name)
     {
@@ -32,12 +31,6 @@ internal sealed class TitleViewModel : IEntityObject
     public override string ToString()
     {
         return string.Concat(Id, " ", Name);
-    }
-
-    public static void SetController(string controller)
-    {
-        lock (lockObject)
-            Controller = controller;
     }
 
     public static implicit operator TitleEntity(TitleViewModel viewModel)
